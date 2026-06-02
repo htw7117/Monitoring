@@ -1,4 +1,5 @@
 import requests
+import time
 import os
 from datetime import datetime
 import zoneinfo
@@ -118,5 +119,6 @@ for name, info in SERIES.items():
         "values": get_fred_data(info["id"]),
         "unit": info["unit"]
     }
+    time.sleep(1)  # 호출 사이 1초 대기
 
 send_teams_message(data)
