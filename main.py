@@ -6,12 +6,12 @@ import zoneinfo
 
 TEAMS_WEBHOOK_URL = os.environ["TEAMS_WEBHOOK_URL"]
 
-def get_usdjpy():
-    ticker = yf.Ticker("JPY=X")
+def get_rate(ticker_symbol):
+    ticker = yf.Ticker(ticker_symbol)
     return ticker.fast_info.last_price
 
-def send_teams_message(rate):
-    kst = datetime.now(zoneinfo.ZoneInfo("Asia/Seoul"))  # 한국 시간으로 변경
+def send_teams_message(usdjpy, usdkrw):
+    kst = datetime.now(zoneinfo.ZoneInfo("Asia/Seoul"))
 
     card = {
         "@type": "MessageCard",
