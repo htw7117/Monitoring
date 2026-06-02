@@ -1,4 +1,4 @@
-name: USD/JPY 환율 알림
+name: USD/JPY & USD/KRW 환율 알림
 
 on:
   schedule:
