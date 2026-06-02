@@ -22,4 +22,4 @@ jobs:
       - name: 주식 알림 실행
         env:
           TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
-        run: python main_stock.py
+        run: python main_kr_stock.py
