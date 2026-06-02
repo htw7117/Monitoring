@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
 
       - name: Python 설치
         uses: actions/setup-python@v5
@@ -23,3 +25,11 @@ jobs:
         env:
           TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
         run: python main_exchange.py
+
+      - name: CSV 커밋 및 푸시
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add data/exchange.csv
+          git diff --staged --quiet || git commit -m "환율 데이터 업데이트 $(date +'%Y-%m-%d %H:%M')"
+          git push
