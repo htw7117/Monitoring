@@ -16,19 +16,21 @@ def send_teams_message(rate):
     card = {
         "@type": "MessageCard",
         "@context": "https://schema.org/extensions",
-        "summary": "USD/JPY 환율 정기 알림",
+        "summary": "환율 정기 알림",
         "themeColor": "0078D4",
-        "title": "💱 USD/JPY 환율 정기 알림",
+        "title": "💱 환율 정기 알림",
         "sections": [{
             "facts": [
-                {"name": "현재 환율", "value": f"**{rate:.3f} 엔**"},
+                {"name": "USD/JPY", "value": f"**{usdjpy:.3f} 엔**"},
+                {"name": "USD/KRW", "value": f"**{usdkrw:.2f} 원**"},
                 {"name": "시간", "value": kst.strftime("%Y-%m-%d %H:%M:%S (KST)")},
             ]
         }]
     }
 
     res = requests.post(TEAMS_WEBHOOK_URL, json=card)
-    print(f"[{kst.strftime('%H:%M:%S')}] {rate:.3f} 엔  {'✅' if res.status_code in (200,202) else '❌'}")
+    print(f"[{kst.strftime('%H:%M:%S')}] JPY {usdjpy:.3f} / KRW {usdkrw:.2f}  {'✅' if res.status_code in (200,202) else '❌'}")
 
-rate = get_usdjpy()
-send_teams_message(rate)
+usdjpy = get_rate("JPY=X")
+usdkrw = get_rate("KRW=X")
+send_teams_message(usdjpy, usdkrw)
