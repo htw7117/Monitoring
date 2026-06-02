@@ -1,0 +1,24 @@
+name: USD/JPY 환율 알림
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # 5분마다 실행
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Python 설치
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 패키지 설치
+        run: pip install yfinance requests
+
+      - name: 환율 알림 실행
+        env:
+          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+        run: python main.py
