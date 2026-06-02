@@ -2,7 +2,7 @@ name: 미국 주식 정기 알림
 
 on:
   schedule:
-    - cron: '*/10 13-21 * * 1-5'  # 평일 09:30~16:00 ET (UTC 13:30~21:00)
+    - cron: '*/30 13-21 * * 1-5'  # 평일 09:30~16:00 ET (UTC 13:30~21:00)
   workflow_dispatch:
 
 jobs:
