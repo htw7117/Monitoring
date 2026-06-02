@@ -9,7 +9,6 @@ FRED_API_KEY = os.environ["FRED_API_KEY"]
 
 SERIES = {
     "🇺🇸 미국 기준금리": {"id": "FEDFUNDS", "unit": "%"},
-    "🇯🇵 일본 기준금리": {"id": "BOJDPBROR",      "unit": "%"},
     "🇺🇸 미국 CPI":     {"id": "CPIAUCSL", "unit": "p"},
 }
 
