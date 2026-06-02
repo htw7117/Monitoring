@@ -22,7 +22,14 @@ def get_fred_data(series_id):
         "limit": 2
     }
     res = requests.get(url, params=params)
-    observations = res.json()["observations"]
+    data = res.json()
+
+    # 응답 내용 출력 (디버깅용)
+    if "observations" not in data:
+        print(f"FRED API 오류 응답: {data}")
+        raise Exception(f"FRED API 오류: {data}")
+
+    observations = data["observations"]
     current = float(observations[0]["value"])
     previous = float(observations[1]["value"])
     date = observations[0]["date"]
