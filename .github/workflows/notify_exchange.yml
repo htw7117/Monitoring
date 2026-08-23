@@ -2,7 +2,7 @@ name: USD/JPY & USD/KRW 환율 알림
 
 on:
   schedule:
-    - cron: '0 */1 * * *'
+    - cron: '0 23,11 * * *'
   workflow_dispatch:
 
 jobs:
